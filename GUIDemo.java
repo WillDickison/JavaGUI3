@@ -14,24 +14,45 @@ public class GUIDemo extends JFrame
 {
     private JPanel panel;
     private JButton biggerButton;
+   import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+/**
+ * Minimal Java Swing application.
+ * 
+ * @author Nathan Sprague
+ * 
+ */
+public class GUIDemo extends JFrame
+{
+    private JPanel panel;
+    private JButton biggerButton;
     private JButton smallerButton;
+    private JButton colorButton;
 
     /**
      * Set up the application.
      */
     public GUIDemo()
     {
-	setTitle("Bigger/Smaller");
+	setTitle("Bigger/Smaller/Color");
         setSize(200, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         biggerButton = new JButton("BIGGER");
         smallerButton = new JButton("SMALLER");
+        colorButton = new JButton("ChangeColor");
         biggerButton.addActionListener(new ButtonHandler());
         smallerButton.addActionListener(new ButtonHandler());
+        colorButton.addActionListener(new ButtonHandler());
         add(panel);
         panel.add(biggerButton);
         panel.add(smallerButton);
+        panel.add(colorButton);
         setVisible(true);
     }
 
@@ -53,9 +74,14 @@ public class GUIDemo extends JFrame
             {
                 setSize(size.width + 10, size.height + 10);
             }
-            else
+            else if(e.getSource().equals(smallerButton))
             {
                 setSize(size.width - 10, size.height - 10);
+            }
+            else 
+            {
+                
+                panel.setBackground(new Color((int)(Math.random() * 256),(int)(Math.random() * 256),(int)(Math.random() * 256)));
             }
 
         }
@@ -69,3 +95,4 @@ public class GUIDemo extends JFrame
         GUIDemo app = new GUIDemo();
     }
 }
+
